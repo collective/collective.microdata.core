@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.microdata.core">
+
+  <five:registerPackage package="." initialize=".initialize" />
+  <include package=".browser" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.microdata.core"
+      directory="profiles/default"
+      description="Add microdata support to Plone (core package)"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>

@@ -1,0 +1,4 @@
+<layers>
+    <layer name="collective.microdata.core"
+           interface="collective.microdata.core.interfaces.IMicrodataCoreLayer" />
+</layers>

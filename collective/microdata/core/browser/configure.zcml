@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="plone">
+    
+  <include package="plone.app.contentmenu" />
+
+  <browser:page
+      for="OFS.interfaces.IFolder"
+      name="folder_listing"
+      layer="..interfaces.IMicrodataCoreLayer"
+      template="templates/folder_listing.pt"
+      permission="zope2.View"
+      />
+  <browser:menuItem
+      for="OFS.interfaces.IFolder"
+      menu="plone_displayviews"
+      title="Standard view"
+      action="@@folder_listing"
+      description=""
+      />
+
+
+</configure>
