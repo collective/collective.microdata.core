@@ -7,6 +7,10 @@
   <five:registerPackage package="." initialize=".initialize" />
   <include package=".browser" />
 
+  <adapter for="Products.Archetypes.interfaces.base.IBaseContent"
+           provides=".interfaces.ISchemaOrgThing"
+           factory=".adapter.ThingMicrodataProvider" />
+
   <genericsetup:registerProfile
       name="default"
       title="collective.microdata.core"

@@ -5,9 +5,17 @@ class IMicrodataCoreLayer(Interface):
     """Marker interface for the collective.microdata.event layer"""
 
 
-class ISchemaOrgThing(Interface):
-    """See http://schema.org/Thing"""
+class IMicrodataVocabulary(Interface):
     
+    microdata_vocabulary = schema.URI(title=u"Microdata type",
+                                      description=u"An URI that identify "
+                                                  u"univocally the microdata type",
+                                      required=True)
+
+
+class ISchemaOrgThing(IMicrodataVocabulary):
+    """See http://schema.org/Thing"""
+        
     additionalType = schema.URI(title=u"Additional type",
                                 description=u"An additional type for the item, "
                                             u"typically used for adding more "
@@ -30,3 +38,5 @@ class ISchemaOrgThing(Interface):
     url = schema.URI(title=u"URL",
                      description=u"URL of the item.",
                      required=True)
+
+
