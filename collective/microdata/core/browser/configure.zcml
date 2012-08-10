@@ -15,6 +15,7 @@
       for="OFS.interfaces.IFolder"
       name="folder_listing"
       layer="..interfaces.IMicrodataCoreLayer"
+      class=".view.ListingView"
       template="templates/folder_listing.pt"
       permission="zope2.View"
       />

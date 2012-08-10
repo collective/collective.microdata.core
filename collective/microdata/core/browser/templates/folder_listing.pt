@@ -66,18 +66,22 @@
                                    item_start item/start|item/StartDate|nothing;
                                    item_end item/end|item/EndDate|nothing;
                                    item_sametime python: item_start == item_end;
-                                   item_samedate python: (item_end - item_start &lt; 1) if item_type == 'Event' else False">
+                                   item_samedate python: (item_end - item_start &lt; 1) if item_type == 'Event' else False;
+                                   microdata python:view.get_microdata(item)">
                 <metal:block define-slot="entry">
                 <dt metal:define-macro="listitem"
-                    tal:attributes="class python:item_type == 'Event' and 'vevent' or ''">
+                    itemscope="itemscope"
+                    tal:attributes="class python:item_type == 'Event' and 'vevent' or '';
+                                    itemtype microdata/microdata_vocabulary;">
 
                     <span class="summary">
                         <img tal:replace="structure item_icon/html_tag" />
                         <a href="#"
+                           itemprop="url"
                            tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;
-                                           class string:$item_type_class $item_wf_state_class url"
-                           tal:content="item_title_or_id">
-                            Item Title
+                                           class string:$item_type_class $item_wf_state_class url">
+                           <span itemprop="name"
+                                 tal:content="item_title_or_id">Item Title</span>
                         </a>
                     </span>
 

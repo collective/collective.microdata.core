@@ -15,3 +15,16 @@ class ThingMicrodataProvider(object):
         self.url = content.absolute_url()
         if content.getField('image'):
             self.image = content.absolute_url() + '/image'
+
+
+class ThingMicrodataBrainProvider(object):
+    implements(ISchemaOrgThing)
+    
+    def __init__(self, brain):
+        self.brain = brain
+        self.microdata_vocabulary = 'http://schema.org/Thing'
+        self.additionalType = None
+        self.description = brain.Description
+        self.name = brain.Title
+        self.url = brain.getURL()
+        

@@ -11,6 +11,10 @@
            provides=".interfaces.ISchemaOrgThing"
            factory=".adapter.ThingMicrodataProvider" />
 
+  <adapter for="Products.ZCatalog.interfaces.ICatalogBrain"
+           provides=".interfaces.ISchemaOrgThing"
+           factory=".adapter.ThingMicrodataBrainProvider" />
+
   <genericsetup:registerProfile
       name="default"
       title="collective.microdata.core"
