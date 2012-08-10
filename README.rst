@@ -1,6 +1,6 @@
 Introduction
 ============
 
+This is the core product for adding `microdata`__ support to Plone.
 
-
-This product may contain traces of nuts.
+__ http://en.wikipedia.org/wiki/Microdata_%28HTML%29 
