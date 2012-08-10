@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+
+ <javascript cacheable="True" compression="safe"
+     cookable="True" enabled="1" expression=""
+     id="++resource++collective.microdata.core.resources/jquery.microdata.js" />
+
+ <javascript cacheable="True" compression="safe"
+     cookable="True" enabled="1" expression=""
+     id="++resource++collective.microdata.core.resources/schemas.js" />
+
+</object>
