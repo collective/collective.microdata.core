@@ -7,6 +7,8 @@
   <five:registerPackage package="." initialize=".initialize" />
   <include package=".browser" />
 
+  <adapter name="microdata_itemtype" factory=".indexer.microdata_itemtype" />
+
   <adapter for="Products.Archetypes.interfaces.base.IBaseContent"
            provides=".interfaces.ISchemaOrgThing"
            factory=".adapter.ThingMicrodataProvider" />

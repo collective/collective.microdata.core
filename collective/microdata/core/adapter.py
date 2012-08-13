@@ -5,7 +5,7 @@ from collective.microdata.core.interfaces import ISchemaOrgThing
 
 class ThingMicrodataProvider(object):
     implements(ISchemaOrgThing)
-    
+
     def __init__(self, content):
         self.microdata_vocabulary = 'http://schema.org/Thing'
         self.content = content
