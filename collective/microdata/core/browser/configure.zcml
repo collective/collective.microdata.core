@@ -27,4 +27,13 @@
       description=""
       />
 
+  <browser:page
+      for="*"
+      name="folder_listing_item"
+      layer="..interfaces.IMicrodataCoreLayer"
+      class=".view.BaseItemListingView"
+      template="templates/folder_listing_item.pt"
+      permission="zope2.View"
+      />
+
 </configure>
