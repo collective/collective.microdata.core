@@ -31,7 +31,7 @@
       for="OFS.interfaces.IFolder"
       name="folder_summary_view"
       layer="..interfaces.IMicrodataCoreLayer"
-      class=".view.ListingView"
+      class=".view.SummaryView"
       template="templates/folder_summary_view.pt"
       permission="zope2.View"
       />
@@ -49,6 +49,14 @@
       layer="..interfaces.IMicrodataCoreLayer"
       class=".view.BaseItemListingView"
       template="templates/folder_listing_item.pt"
+      permission="zope2.View"
+      />
+  <browser:page
+      for="*"
+      name="folder_summary_view_item"
+      layer="..interfaces.IMicrodataCoreLayer"
+      class=".view.BaseItemListingView"
+      template="templates/folder_summary_view_item.pt"
       permission="zope2.View"
       />
 

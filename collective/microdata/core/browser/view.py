@@ -8,7 +8,9 @@ from plone.memoize import view
 
 from collective.microdata.core.interfaces import ISchemaOrgThing
 
-class ListingView(BrowserView):
+class BaseListingView(BrowserView):
+
+    TEMPLATE_ID = ''
 
     @view.memoize
     def get_microdata(self, brain):
@@ -26,11 +28,22 @@ class ListingView(BrowserView):
         microdata = self.get_microdata(item)
         try:
             view = getMultiAdapter ((self.context, self.request),
-                                    name='%s folder_listing_item' % microdata.microdata_vocabulary)
+                                    name='%s %s_item' % (microdata.microdata_vocabulary, self.TEMPLATE_ID))
         except ComponentLookupError:
             view = getMultiAdapter ((self.context, self.request),
-                                    name='folder_listing_item')            
+                                    name='%s_item' % self.TEMPLATE_ID)
         return view(item, microdata)
+
+
+class ListingView(BaseListingView):
+    """View for the folder_listing template"""
+    TEMPLATE_ID = 'folder_listing'
+
+
+class SummaryView(BaseListingView):
+    """View for the folder_summary_view template"""
+
+    TEMPLATE_ID = 'folder_summary_view'
 
 
 class BaseItemListingView(BrowserView):

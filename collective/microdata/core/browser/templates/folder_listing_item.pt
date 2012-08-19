@@ -20,19 +20,14 @@
                                    item_type_class python:'contenttype-' + normalizeString(item_type);
                                    item_wf_state item/review_state|python: context.portal_workflow.getInfoFor(item, 'review_state', '');
                                    item_wf_state_class python:'state-' + normalizeString(item_wf_state);
-                                   item_creator item/Creator;
-                                   item_start item/start|item/StartDate|nothing;
-                                   item_end item/end|item/EndDate|nothing;
-                                   item_sametime python: item_start == item_end;
-                                   item_samedate python: (item_end - item_start &lt; 1) if item_type == 'Event' else False;
-                                   ">
+                                   item_creator item/Creator;"
+                       i18n:domain="plone">
                 <metal:block>
 
                     <dt metal:define-macro="listitem"
                         itemscope="itemscope"
-                        tal:attributes="class python:item_type == 'Event' and 'vevent' or '';
-                                        itemtype microdata/microdata_vocabulary;">
-    
+                        tal:attributes="itemtype microdata/microdata_vocabulary;">
+
                         <span class="summary">
                             <img tal:replace="structure item_icon/html_tag" />
                             <a href="#"
@@ -45,46 +40,6 @@
                         </span>
     
                         <span class="documentByLine">
-                            <span tal:condition="python: item_type == 'Event' and item_sametime"
-                                  i18n:translate="label_event_byline_onlyfrom">
-                                 <abbr class="dtstart"
-                                       tal:attributes="title python:item_start"
-                                       tal:content="python:toLocalizedTime(item_start,long_format=1)"
-                                       i18n:name="start">from date</abbr>
-                            </span>
-                            <span tal:condition="python: item_type == 'Event' and item_samedate and not item_sametime"
-                                  i18n:translate="label_event_byline_samedate">
-                                 <abbr class="dtstart"
-                                       tal:attributes="title python:item_start"
-                                       tal:content="python:toLocalizedTime(item_start)"
-                                       i18n:name="start">from date</abbr> from
-                                 <abbr class="dtstart"
-                                       tal:attributes="title python:item_start"
-                                       tal:content="python:toLocalizedTime(item_start,time_only=1)"
-                                       i18n:name="starttime">from time</abbr> to
-                                 <abbr class="dtend"
-                                       tal:attributes="title python:item_end"
-                                       tal:content="python:toLocalizedTime(item_end,time_only=1)"
-                                       i18n:name="end">to time</abbr>
-                            </span>
-                            <span tal:condition="python: item_type == 'Event' and not item_samedate and not item_sametime"
-                                  i18n:translate="label_event_byline">
-                                  from
-                                       <abbr class="dtstart"
-                                       tal:attributes="title python:item_start"
-                                       tal:content="python:toLocalizedTime(item_start,long_format=1)"
-                                       i18n:name="start">from date</abbr> to
-                                 <abbr class="dtend"
-                                       tal:attributes="title python:item_end"
-                                       tal:content="python:toLocalizedTime(item_end,long_format=1)"
-                                       i18n:name="end">to date</abbr>
-                            </span>
-                             <span tal:condition="python: item_type == 'Event' and item.location"
-                                  i18n:translate="label_event_byline_location">&mdash;
-                                 <span tal:content="string:${item/location}"
-                                       class="location"
-                                       i18n:name="location">Oslo</span>,
-                            </span>
                             <tal:byline condition="show_about">
                                 &mdash;
     
@@ -124,14 +79,19 @@
                                 </metal:description>
                             </tal:byline>
                         </span>
+
+                        <meta itemprop="description"
+                              tal:attributes="content item_description" />
     
                     </dt>
-    
+
                     <dd tal:condition="item_description">
+                        <!-- itemprop there is futile, as we are outside the itemscope -->
                         <span class="description"
                                tal:content="item_description">
                             description
                         </span>
                     </dd>
-</metal:block>
-</tal:block>
+
+                </metal:block>
+            </tal:block>
