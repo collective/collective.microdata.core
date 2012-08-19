@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+version = '0.1'
 
 setup(name='collective.microdata.core',
       version=version,
@@ -11,10 +11,12 @@ setup(name='collective.microdata.core',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
+        "Development Status :: 4 - Beta",
         "Framework :: Plone",
+        "Framework :: Plone :: 4.2",
         "Programming Language :: Python",
         ],
-      keywords='plone microdata schema.org html5 event',
+      keywords='plone microdata schema.org html5',
       author='keul',
       author_email='luca@keul.it',
       url='https://github.com/keul/collective.microdata.core',
