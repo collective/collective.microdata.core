@@ -15,4 +15,7 @@ __ http://krofdrakula.github.com/microdata-tool/
 
 To enable it while testing your site, just run the *testing* Generic Setup profile from
 your *site_setup* tool. 
+
 This will enable the JavaScript tester in every page.
+
+**Hint**: duration checker seems not working properly.
