@@ -29,7 +29,7 @@
       name="testing"
       title="collective.microdata.core: test your microdata"
       directory="profiles/javascript_tester"
-      description="Add some develop targeted JavaScript for testing microdata"
+      description="Add some JavaScript for testing your microdata"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
