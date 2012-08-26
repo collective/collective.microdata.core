@@ -10,11 +10,11 @@
   <adapter name="microdata_itemtype" factory=".indexer.microdata_itemtype" />
 
   <adapter for="Products.Archetypes.interfaces.base.IBaseContent"
-           provides=".interfaces.ISchemaOrgThing"
+           provides=".interfaces.IMicrodataVocabulary"
            factory=".adapter.ThingMicrodataProvider" />
 
   <adapter for="Products.ZCatalog.interfaces.ICatalogBrain"
-           provides=".interfaces.ISchemaOrgThing"
+           provides=".interfaces.IMicrodataVocabulary"
            factory=".adapter.ThingMicrodataBrainProvider" />
 
   <genericsetup:registerProfile
