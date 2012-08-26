@@ -28,7 +28,7 @@
   <genericsetup:registerProfile
       name="testing"
       title="collective.microdata.core: test your microdata"
-      directory="profiles/testing"
+      directory="profiles/javascript_tester"
       description="Add some develop targeted JavaScript for testing microdata"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
