@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import zope.component
-
 from zope.configuration import xmlconfig
 
 from plone.testing import z2
@@ -14,7 +13,10 @@ from plone.app.testing import applyProfile
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 
+from Products.ATContentTypes.interfaces import IATNewsItem
+
 from collective.microdata.core.tests.testingadapter import NewsItemTestingMicrodataAdapter
+from collective.microdata.core.interfaces import IMicrodataVocabulary
 
 class MicrodataCore(PloneSandboxLayer):
 
@@ -29,9 +31,9 @@ class MicrodataCore(PloneSandboxLayer):
         z2.installProduct(app, 'collective.microdata.core')
         
         zope.component.provideAdapter(
-            testingadapter.NewsItemTestingMicrodataAdapter,
-            (Products.ATContentTypes.interfaces.IATNewsItem),
-            provides=collective.microdata.core.interfaces.IMicrodataVocabulary
+            NewsItemTestingMicrodataAdapter,
+            (IATNewsItem,),
+            provides=IMicrodataVocabulary
         )
 
     def setUpPloneSite(self, portal):
