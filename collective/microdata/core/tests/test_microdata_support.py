@@ -12,7 +12,7 @@ class TestMicrodataSupport(unittest.TestCase):
     
     layer = MICRODATA_CORE_INTEGRATION_TESTING
     
-    def markRequestWithLayer(self)
+    def markRequestWithLayer(self):
         # to be removed when p.a.testing will fix https://dev.plone.org/ticket/11673
         request = self.layer['request']
         interface.alsoProvides(request, IMicrodataCoreLayer)
