@@ -16,7 +16,7 @@ class NewsItemTestingMicrodataAdapter(ThingMicrodataProvider):
     implements(ISchemaOrgMinimalBook)
     
     def __init__(self, content):
-        super(ThingMicrodataProvider, self).__init__(content)
+        super(NewsItemTestingMicrodataAdapter, self).__init__(content)
         self.microdata_vocabulary = 'http://schema.org/Book'
         self.genre = u'Fantasy'
         self.text = content.getText()

@@ -6,7 +6,7 @@ from zope import interface
 from zope.component import queryUtility
 
 from collective.microdata.core.testing import MICRODATA_CORE_INTEGRATION_TESTING
-from collective.micriodata.core.interfaces import IMicrodataCoreLayer
+from collective.microdata.core.interfaces import IMicrodataCoreLayer
 
 class TestMicrodataSupport(unittest.TestCase):
     
@@ -21,8 +21,9 @@ class TestMicrodataSupport(unittest.TestCase):
         self.markRequestWithLayer()
         portal = self.layer['portal']
         request = self.layer['request']
-        portal.invokeFactory(new_id='news',
-                             title="Lord of the Rings",
+        portal.invokeFactory(type_name='News Item',
+                             id='news',
+                             title="The Lord of the Rings",
                              description="Boromir will die, sooner or later",
                              text="All begin in the Shrine...",
                              creator="J. R. R. Tolkien")
@@ -30,4 +31,4 @@ class TestMicrodataSupport(unittest.TestCase):
         self.news = portal.news
     
     def test_basic_adapter_usage(self):
-        pass
+        self.assertFalse(False)

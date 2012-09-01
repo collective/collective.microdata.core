@@ -15,7 +15,7 @@ from plone.app.testing import TEST_USER_ID
 
 from Products.ATContentTypes.interfaces import IATNewsItem
 
-from collective.microdata.core.tests.testingadapter import NewsItemTestingMicrodataAdapter
+from collective.microdata.core.tests.base import NewsItemTestingMicrodataAdapter
 from collective.microdata.core.interfaces import IMicrodataVocabulary
 
 class MicrodataCore(PloneSandboxLayer):
