@@ -3,6 +3,8 @@
 import zope.component
 from zope.configuration import xmlconfig
 
+from Products.ZCatalog.interfaces import ICatalogBrain
+
 from plone.testing import z2
 
 from plone.app.testing import PLONE_FIXTURE
@@ -16,6 +18,7 @@ from plone.app.testing import TEST_USER_ID
 from Products.ATContentTypes.interfaces import IATNewsItem
 
 from collective.microdata.core.tests.base import NewsItemTestingMicrodataAdapter
+from collective.microdata.core.tests.base import NewsItemTestingMicrodataBrainAdapter
 from collective.microdata.core.interfaces import IMicrodataVocabulary
 
 class MicrodataCore(PloneSandboxLayer):
@@ -35,6 +38,14 @@ class MicrodataCore(PloneSandboxLayer):
             (IATNewsItem,),
             provides=IMicrodataVocabulary
         )
+
+        zope.component.provideAdapter(
+            NewsItemTestingMicrodataBrainAdapter,
+            (ICatalogBrain,),
+            provides=IMicrodataVocabulary,
+            name=u'http://schema.org/Book'
+        )
+
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.microdata.core:default')

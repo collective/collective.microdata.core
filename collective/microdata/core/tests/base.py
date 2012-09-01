@@ -4,6 +4,7 @@ from zope.interface import implements
 
 from collective.microdata.core.interfaces import ISchemaOrgThing
 from collective.microdata.core.adapter import ThingMicrodataProvider
+from collective.microdata.core.adapter import ThingMicrodataBrainProvider
 
 class ISchemaOrgMinimalBook(ISchemaOrgThing):
     """
@@ -11,6 +12,7 @@ class ISchemaOrgMinimalBook(ISchemaOrgThing):
     
     This is only used for testing, so we don't put there ALL the vocabulary elements
     """
+
 
 class NewsItemTestingMicrodataAdapter(ThingMicrodataProvider):
     implements(ISchemaOrgMinimalBook)
@@ -23,3 +25,12 @@ class NewsItemTestingMicrodataAdapter(ThingMicrodataProvider):
         self.creator = content.Creator()
         
 
+class NewsItemTestingMicrodataBrainAdapter(ThingMicrodataBrainProvider):
+    implements(ISchemaOrgMinimalBook)
+    
+    def __init__(self, brain):
+        super(NewsItemTestingMicrodataBrainAdapter, self).__init__(brain)
+        self.microdata_vocabulary = 'http://schema.org/Book'
+        self.genre = u'Fantasy'
+        self.text = brain.getObject().getText()
+        self.creator = brain.Creator

@@ -13,7 +13,7 @@ How to use
 This package simply provide raw support, not really useful on his own. It is intended to be
 extender by 3rd part projects that want to microdata support for Plone.
 
-One example: `collective.microdata.event`__.
+One complete implementation: `collective.microdata.event`__.
 
 __ http://pypi.python.org/pypi/collective.microdata.event
 
@@ -21,24 +21,32 @@ The microdata vocabulary
 ------------------------
 
 Every content type that wanna provide microdata information needs to provide an adapter for the
-``IMicrodataVocabulary`` interface. This interface is limited to a single information: n **URI
+``IMicrodataVocabulary`` interface. This interface is limited to a single information: an **URI
 to a microdata vocabulary**.
 
 The schema.org implementation
 -----------------------------
 
-The most promising implementation of microdata is the one defined at `schema.org`__. This package
-is providing the most-generic type defined there: the `Thing`__ type.
+As the most promising implementation of microdata is the one defined at `schema.org`__, this package
+is supporting it. This is done providing the most-generic type defined: the `Thing`__ type.
+
+This is done for all Plone content types and catalog objects (for catalog: a new catalog metadata
+``microdata_itemtype`` will be added to your catalog, saving there the most specific vocabulary
+URL found).
 
 __ http://schema.org/
 __ http://schema.org/Thing
 
-This is done providing an adapter for ``ISchemaOrgThing`` interface (that extends ``IMicrodataVocabulary``).
+This is done providing adapters for ``ISchemaOrgThing`` interface (that extends ``IMicrodataVocabulary``).
 
 How to extend
 =============
 
-Your product must provide his own implementation for the ``IMicrodataVocabulary``::
+From contents
+-------------
+
+To get microdata information from a content types, your product must provide his own implementation for
+the ``IMicrodataVocabulary``::
 
     <adapter for="your.products.content.IType"
              provides="collective.microdata.core.interfaces.IMicrodataVocabulary"
@@ -51,10 +59,38 @@ Then you need to provide the adapter::
     
     def __init__(self, content):
         self.microdata_vocabulary = 'http://your.microdata.uri'
+        # now get data from the content
         self.microdata_data1 = ... 
 
-The your content type view must obtain the microdata adapter you defined, and put the right HTML
+Then your content's view must obtain the microdata adapter you defined, and put the right HTML
 code in the view.
+
+From catalog
+------------
+
+
+XXXX catalog brain
+
+
+There's an adapter for getting raw ``Thing`` microdata from a catalog brain from all Plone content
+types, but your 3rd party content type must also provide a more specific ones::
+
+    <adapter for="Products.ZCatalog.interfaces.ICatalogBrain"
+             provides="collective.microdata.core.interfaces.IMicrodataVocabulary"
+             factory=".adapter.YourTypeMicrodataBrainProvider"
+             name="http://your.microdata.uri" />
+
+Then you need to provide the adapter::
+
+    class YourTypeMicrodataBrainProvider(object):
+    implements(IYourMicrodataVocabulary)
+    
+    def __init__(self, brain):
+        self.microdata_vocabulary = 'http://your.microdata.uri'
+        # now get data from the catalog
+        self.microdata_data1 = ... 
+
+If your adapter is more specific than the default "Thing" ones, it will replace that one in the catalog.
 
 Support for folder content listing views
 ========================================
@@ -70,7 +106,7 @@ Testing your microdata
 ======================
 
 This product also include a JavaScript tester microdata tool called `Microdata Tool`__
-(a modified ones, just to fix some stupid Sunburst CSS styles).
+(a modified ones, just to fix some crappy Sunburst CSS rules).
 
 __ http://krofdrakula.github.com/microdata-tool/
 
