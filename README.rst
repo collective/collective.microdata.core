@@ -3,17 +3,17 @@
 Introduction
 ============
 
-This is product for adding `microdata`__ support to your Plone contents.
+This product is designed for adding `microdata`__ support to your Plone contents.
 
 __ http://en.wikipedia.org/wiki/Microdata_%28HTML%29
 
 How to use
 ==========
 
-This package simply provide raw support, not really useful on his own. It is intended to be
-extended by 3rd part projects that want to microdata support for Plone.
+This package simply provides raw support, not really useful on his own. It is intended to be
+extended by 3rd party projects that want provide microdata support for Plone.
 
-One complete implementation of all instruction below: `collective.microdata.event`__.
+One complete implementation of all instruction below is `collective.microdata.event`__.
 
 __ http://pypi.python.org/pypi/collective.microdata.event
 
