@@ -3,7 +3,7 @@
 Introduction
 ============
 
-This is the core product for adding `microdata`__ support to Plone.
+This is product for adding `microdata`__ support to your Plone contents.
 
 __ http://en.wikipedia.org/wiki/Microdata_%28HTML%29
 
@@ -11,9 +11,9 @@ How to use
 ==========
 
 This package simply provide raw support, not really useful on his own. It is intended to be
-extender by 3rd part projects that want to microdata support for Plone.
+extended by 3rd part projects that want to microdata support for Plone.
 
-One complete implementation: `collective.microdata.event`__.
+One complete implementation of all instruction below: `collective.microdata.event`__.
 
 __ http://pypi.python.org/pypi/collective.microdata.event
 
@@ -24,20 +24,26 @@ Every content type that wanna provide microdata information needs to provide an 
 ``IMicrodataVocabulary`` interface. This interface is limited to a single information: an **URI
 to a microdata vocabulary**.
 
+Microdata vocabulary are standardized outside HTML 5 specifications, so is possible to have
+different families of vocabularies. You can also invent your own.
+
 The schema.org implementation
 -----------------------------
 
-As the most promising implementation of microdata is the one defined at `schema.org`__, this package
-is supporting it. This is done providing the most-generic type defined: the `Thing`__ type.
-
-This is done for all Plone content types and catalog objects (for catalog: a new catalog metadata
-``microdata_itemtype`` will be added to your catalog, saving there the most specific vocabulary
-URL found).
+Nowadays the most promising implementation of microdata is the one defined at `schema.org`__ so this
+package is supporting it. This is done providing the most-generic type defined: the `Thing`__ type.
 
 __ http://schema.org/
 __ http://schema.org/Thing
 
+This is automatically done for all Plone content types and catalog objects (for catalog: a new
+catalog metadata ``microdata_itemtype`` will be added to your catalog, saving there the most
+specific microdata vocabulary URL found).
+
 This is done providing adapters for ``ISchemaOrgThing`` interface (that extends ``IMicrodataVocabulary``).
+
+Again: knowing that all your Plone content types are "things" is not very funny, and not a real step
+forward.
 
 How to extend
 =============
@@ -62,15 +68,32 @@ Then you need to provide the adapter::
         # now get data from the content
         self.microdata_data1 = ... 
 
-Then your content's view must obtain the microdata adapter you defined, and put the right HTML
-code in the view.
+Then your content's view must obtain the microdata adapter you defined::
+
+    class YourTypeView(BrowserView):
+    
+        ...
+    
+        def microdata(self):
+            return IMicrodataVocabulary(self.context)
+
+
+Finally your view template must use microdata information::
+
+    ...
+    <article metal:fill-slot="main"
+             tal:define="microdata view/microdata"
+             itemscope="itemscope"
+             tal:attributes="itemtype microdata/microdata_vocabulary">
+    ...
+
 
 From catalog
 ------------
 
-
-XXXX catalog brain
-
+The portal catalog ``microdata_itemtype`` column will automatically store the content microdata
+vocabulary URL. Default value is the "Thing" URL (http://schema.org/Thing) but as soon as you
+provide a more specific adapter, this URL will be replaced with the new ones.
 
 There's an adapter for getting raw ``Thing`` microdata from a catalog brain from all Plone content
 types, but your 3rd party content type must also provide a more specific ones::
@@ -87,10 +110,8 @@ Then you need to provide the adapter::
     
     def __init__(self, brain):
         self.microdata_vocabulary = 'http://your.microdata.uri'
-        # now get data from the catalog
+        # now get data from the cataloged content
         self.microdata_data1 = ... 
-
-If your adapter is more specific than the default "Thing" ones, it will replace that one in the catalog.
 
 Support for folder content listing views
 ========================================
