@@ -20,7 +20,7 @@ __ http://pypi.python.org/pypi/collective.microdata.event
 The microdata vocabulary
 ------------------------
 
-Every content type that wanna provide microdata information needs to provide an adapter for the
+Every content type that wanna provide microdata informations needs to provide an adapter for the
 ``IMicrodataVocabulary`` interface. This interface is limited to a single information: an **URI
 to a microdata vocabulary**.
 

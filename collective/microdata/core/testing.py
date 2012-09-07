@@ -49,7 +49,7 @@ class MicrodataCore(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.microdata.core:default')
-        #quickInstallProduct(portal, 'collective.analyticspanel')
+        #quickInstallProduct(portal, 'collective.microdata.core')
         setRoles(portal, TEST_USER_ID, ['Member', 'Manager'])
 
 
