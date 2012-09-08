@@ -15,7 +15,7 @@ extended by 3rd party projects that want provide microdata support for Plone.
 
 One complete implementation of all instruction below is `collective.microdata.event`__.
 
-__ http://pypi.python.org/pypi/collective.microdata.event
+__ http://plone.org/products/collective.microdata.event
 
 The microdata vocabulary
 ------------------------
@@ -119,7 +119,7 @@ Support for folder content listing views
 If you want to provide microdata information also in folder content views (so displaying multiple
 microdata objects in a single page), you could like to install `collective.microdata.contentlisting`__.
 
-__ http://pypi.python.org/pypi/collective.microdata.contentlisting
+__ https://github.com/keul/collective.microdata.contentlisting
 
 See it's documentation for further information on how to use this in you product.
 
