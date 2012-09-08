@@ -3,7 +3,7 @@
 import unittest
 
 from zope import interface
-from zope.component import queryUtility, getAdapter
+from zope.component import getAdapter
 
 from collective.microdata.core.testing import MICRODATA_CORE_INTEGRATION_TESTING
 from collective.microdata.core.interfaces import IMicrodataCoreLayer

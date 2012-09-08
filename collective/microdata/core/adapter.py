@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-from zope.interface import Interface, implements
+from zope.interface import implements
 from collective.microdata.core.interfaces import ISchemaOrgThing
 
 class ThingMicrodataProvider(object):
